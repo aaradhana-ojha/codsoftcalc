@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator using javascript</title>
+    <title>Calculator using JavaScript</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
  <div class="container">
@@ -14,40 +13,61 @@
             <div class="display">
                 <input type="text" name="display">
             </div>
-            <!--javascript code is onclick. Note js is already added within the html i.e seperate file is not made for javascript -->
+            <!-- JavaScript code is in onclick. Note JS is already added within the HTML, i.e., separate file is not made for JavaScript -->
             <div>
-                <input type="button" value="AC" onclick="display.value =''" class="operator">    
-                <input type="button" value="DEL" onclick="display.value  = display.value.toString().slice(0,-1)" class="operator">    
-                <input type="button" value="." onclick="display.value +='.'" class="operator">    
-                <input type="button" value="/" onclick="display.value +='/'" class="operator">    
+                <input type="button" value="AC" onclick="clearDisplay()" class="operator">
+                <input type="button" value="DEL" onclick="deleteLastChar()" class="operator">
+                <input type="button" value="." onclick="appendCharacter('.')" class="operator">
+                <input type="button" value="/" onclick="appendCharacter('/')" class="operator">
             </div>
             <div>
-                <input type="button" value="7" onclick="display.value +='7'">    
-                <input type="button" value="8" onclick="display.value +='8'">    
-                <input type="button" value="9" onclick="display.value +='9'">    
-                <input type="button" value="*" onclick="display.value +='*'" class="operator">    
+                <input type="button" value="7" onclick="appendCharacter('7')">
+                <input type="button" value="8" onclick="appendCharacter('8')">
+                <input type="button" value="9" onclick="appendCharacter('9')">
+                <input type="button" value="*" onclick="appendCharacter('*')" class="operator">
             </div>
             <div>
-                <input type="button" value="4" onclick="display.value +='4'">    
-                <input type="button" value="5" onclick="display.value +='5'">    
-                <input type="button" value="6" onclick="display.value +='6'">    
-                <input type="button" value="-" onclick="display.value +='-'" class="operator" >    
+                <input type="button" value="4" onclick="appendCharacter('4')">
+                <input type="button" value="5" onclick="appendCharacter('5')">
+                <input type="button" value="6" onclick="appendCharacter('6')">
+                <input type="button" value="-" onclick="appendCharacter('-')" class="operator">
             </div>
             <div>
-                <input type="button" value="1" onclick="display.value +='1'">    
-                <input type="button" value="2" onclick="display.value +='2'">    
-                <input type="button" value="3" onclick="display.value +='3'">    
-                <input type="button" value="+" onclick="display.value +='+'" class="operator">    
+                <input type="button" value="1" onclick="appendCharacter('1')">
+                <input type="button" value="2" onclick="appendCharacter('2')">
+                <input type="button" value="3" onclick="appendCharacter('3')">
+                <input type="button" value="+" onclick="appendCharacter('+')" class="operator">
             </div>
             <div>
-                <input type="button" value="00" onclick="display.value +='00'">    
-                <input type="button" value="0" onclick="display.value +='0'">    
-                <input type="button" value="=" onclick="display.value =eval(display.value)" 
-                class="equal operator">    
- 
+                <input type="button" value="00" onclick="appendCharacter('00')">
+                <input type="button" value="0" onclick="appendCharacter('0')">
+                <input type="button" value="=" onclick="evaluateExpression()" class="equal operator">
             </div>
         </form>
     </div>
  </div>   
+<script>
+    const display = document.querySelector('input[name="display"]');
+
+    function appendCharacter(character) {
+        display.value += character;
+    }
+
+    function clearDisplay() {
+        display.value = '';
+    }
+
+    function deleteLastChar() {
+        display.value = display.value.toString().slice(0, -1);
+    }
+
+    function evaluateExpression() {
+        try {
+            display.value = eval(display.value);
+        } catch (error) {
+            display.value = 'Error';
+        }
+    }
+</script>
 </body>
 </html>
